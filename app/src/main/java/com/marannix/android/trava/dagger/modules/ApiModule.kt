@@ -45,8 +45,4 @@ class ApiModule {
     fun provideVenueApi(retrofit: Retrofit): VenueApi {
         return retrofit.create(VenueApi::class.java)
     }
-
-//    fun venueApi(): VenueApi {
-//        return provideVenueApi(provideRetrofit())
-//    }
 }

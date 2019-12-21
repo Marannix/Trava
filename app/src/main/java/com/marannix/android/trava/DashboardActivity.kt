@@ -7,7 +7,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class MainActivity : BaseActivity() {
+class DashboardActivity : BaseActivity() {
 
     @Inject
     lateinit var venueApi: VenueApi
