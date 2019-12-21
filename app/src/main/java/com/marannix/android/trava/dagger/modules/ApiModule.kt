@@ -1,16 +1,24 @@
-package com.marannix.android.trava
+package com.marannix.android.trava.dagger.modules
 
+import com.marannix.android.trava.HeaderInterceptor
+import com.marannix.android.trava.VenueApi
+import dagger.Module
+import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 const val BASE_URL = "https://api.foursquare.com/v2/"
 
-interface ApiService {
+@Module
+class ApiModule {
 
+    @Provides
+    @Singleton
     fun provideRetrofit(): Retrofit {
         // Debugging purpose to show request and response information
         val logging = HttpLoggingInterceptor()
@@ -32,12 +40,13 @@ interface ApiService {
             .build()
     }
 
-    private fun provideVenueApi(retrofit: Retrofit): VenueApi {
+    @Provides
+    @Singleton
+    fun provideVenueApi(retrofit: Retrofit): VenueApi {
         return retrofit.create(VenueApi::class.java)
     }
 
-    fun venueApi(): VenueApi {
-        return provideVenueApi(provideRetrofit())
-    }
-
+//    fun venueApi(): VenueApi {
+//        return provideVenueApi(provideRetrofit())
+//    }
 }
