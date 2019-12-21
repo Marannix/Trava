@@ -1,6 +1,6 @@
 package com.marannix.android.trava.dagger.modules
 
-import com.marannix.android.trava.DashboardActivity
+import com.marannix.android.trava.activity.DashboardActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

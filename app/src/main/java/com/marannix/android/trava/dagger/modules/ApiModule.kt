@@ -1,7 +1,7 @@
 package com.marannix.android.trava.dagger.modules
 
-import com.marannix.android.trava.HeaderInterceptor
-import com.marannix.android.trava.VenueApi
+import com.marannix.android.trava.api.HeaderInterceptor
+import com.marannix.android.trava.api.VenueApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

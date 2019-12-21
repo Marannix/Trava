@@ -1,4 +1,4 @@
-package com.marannix.android.trava
+package com.marannix.android.trava.api
 
 import okhttp3.Interceptor
 import okhttp3.Response

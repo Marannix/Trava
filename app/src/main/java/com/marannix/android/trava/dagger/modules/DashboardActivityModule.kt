@@ -1,7 +1,7 @@
 package com.marannix.android.trava.dagger.modules
 
 import androidx.fragment.app.FragmentActivity
-import com.marannix.android.trava.DashboardActivity
+import com.marannix.android.trava.activity.DashboardActivity
 import dagger.Binds
 import dagger.Module
 
