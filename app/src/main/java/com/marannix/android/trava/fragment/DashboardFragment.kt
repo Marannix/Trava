@@ -12,13 +12,22 @@ import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 class DashboardFragment : BaseFragment() {
 
+    interface OnCitySelectedListener {
+        fun onCitySelected(city: String)
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = DashboardFragment()
     }
 
+    fun attach(listener: OnCitySelectedListener) {
+        this.listener = listener
+    }
+
     private var city = emptyList<String>()
     private val adapter = CityAdapter()
+    private var listener: OnCitySelectedListener? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_dashboard, container, false)
@@ -31,7 +40,7 @@ class DashboardFragment : BaseFragment() {
         setAdapter()
 
         adapter.setCities(city)
-
+        setupListeners()
         autoCompleteTextView.addTextChangedListener {
             adapter.filter.filter(it.toString())
         }
@@ -44,6 +53,15 @@ class DashboardFragment : BaseFragment() {
     private fun setAdapter() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
+    }
+
+
+    private fun setupListeners() {
+        adapter.setListener(object: CityAdapter.OnCityAdapterSelectedListener {
+            override fun onCitySelected(city: String) {
+                listener?.onCitySelected(city)
+            }
+        })
     }
 //    @Inject
 //    lateinit var venueApi: VenueApi
@@ -61,4 +79,6 @@ class DashboardFragment : BaseFragment() {
 //
 //        compositeDisposable.add(disposable)
 //    }
+
+
 }

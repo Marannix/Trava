@@ -6,8 +6,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:textColorPrimaryInverse">@color/white</item>
         <item name="android:textColorPrimary">@color/deep_blue</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="AppTheme">
+        <item name="colorControlNormal">@color/white</item>
     </style>
 
 </resources>

@@ -14,12 +14,20 @@ import kotlinx.android.synthetic.main.cities_auto_complete_row.view.*
 // https://www.youtube.com/watch?v=ocM1Yw_ktqM&t=4s
 class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(), Filterable {
 
+    interface OnCityAdapterSelectedListener {
+        fun onCitySelected(city: String)
+    }
+
+    fun setListener(listener: OnCityAdapterSelectedListener) {
+        this.listener = listener
+    }
+
     private var cities = emptyList<String>()
     private var cityListFiltered = emptyList<String>()
+    private var listener: OnCityAdapterSelectedListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.cities_auto_complete_row, parent, false))
-
     }
 
     override fun getItemCount(): Int {
@@ -28,7 +36,7 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(), Filterable {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (cityListFiltered.isNotEmpty()) {
-            holder.bind(cityListFiltered[position])
+            holder.bind(cityListFiltered[position], listener)
         }
     }
 
@@ -46,7 +54,6 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(), Filterable {
                             filteredList.add(row)
                         }
                     }
-
                     filteredList
                 }
 
@@ -68,12 +75,16 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(), Filterable {
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(cities: String) {
+        fun bind(cities: String, listener: OnCityAdapterSelectedListener?) {
             itemView.cityName.text = cities
             itemView.setOnClickListener {
+                listener?.onCitySelected(cities)
                 Log.d("lol", cities)
             }
         }
     }
 
+    fun clearListener() {
+        listener = null
+    }
 }
