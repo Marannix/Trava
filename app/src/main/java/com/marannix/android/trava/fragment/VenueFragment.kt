@@ -80,7 +80,6 @@ class VenueFragment : BaseFragment() {
                 }
                 is VenueViewState.Success -> {
                     adapter.setVenues(venueViewState.venues)
-//                    Log.d("Venue", venueViewState.venues[0].venue.name)
                 }
                 is VenueViewState.ShowGenericError -> {
                     Log.d("Venue", venueViewState.errorMessage)
