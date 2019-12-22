@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -15,13 +16,14 @@
 
         <ImageView
                 android:id="@+id/venueImage"
-                android:layout_width="0dp"
-                android:layout_height="250dp"
-                android:src="@drawable/venue_building"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
                 android:scaleType="fitXY"
+                android:tint="@color/colorPrimary"
+                tools:src="@drawable/park_88"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
                 android:id="@+id/venueName"
@@ -31,16 +33,14 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="?android:textColorPrimary"
-                app:layout_constraintStart_toStartOf="parent"
+                android:maxLines="1"
+                android:lines="1"
+                app:layout_constraintTop_toTopOf="@id/venueImage"
+                app:layout_constraintStart_toEndOf="@id/venueImage"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/venueImage"/>
-
-        <View
-                android:layout_width="0dp"
-                android:layout_height="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/venueName"
+                app:layout_constraintBottom_toBottomOf="@id/venueImage"
         />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

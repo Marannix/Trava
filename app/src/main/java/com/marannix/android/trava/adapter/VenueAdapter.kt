@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.marannix.android.trava.R
 import com.marannix.android.trava.model.RecommendedPlacesModel
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.venue_item_row.view.*
 
 class VenueAdapter : RecyclerView.Adapter<VenueAdapter.ViewHolder>() {
@@ -36,6 +37,10 @@ class VenueAdapter : RecyclerView.Adapter<VenueAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(venues: RecommendedPlacesModel) {
             itemView.venueName.text = venues.venue.name
+
+            Picasso.get().load(venues.venue.categories[0].icon.prefix + "88" + venues.venue.categories[0].icon.suffix)
+                .into(itemView.venueImage)
+//            itemView.venueImage.setImageDrawable( ) =
         }
     }
 
