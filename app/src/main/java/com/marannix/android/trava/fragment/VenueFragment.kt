@@ -1,12 +1,15 @@
 package com.marannix.android.trava.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.marannix.android.trava.R
 import com.marannix.android.trava.repository.VenueRepository
+import com.marannix.android.trava.state.VenueViewState
 import com.marannix.android.trava.viewmodel.VenueViewModel
 import kotlinx.android.synthetic.main.fragment_venue.*
 import javax.inject.Inject
@@ -44,6 +47,8 @@ class VenueFragment : BaseFragment() {
         super.onStart()
         updateToolbar()
         init()
+        getVenues()
+        subscribeToVenueViewState()
     }
 
     private fun updateToolbar() {
@@ -56,5 +61,26 @@ class VenueFragment : BaseFragment() {
     private fun init() {
         viewmodel =
             activity?.let { ViewModelProviders.of(it, viewModelFactory).get(VenueViewModel::class.java) }
+    }
+
+    private fun getVenues() {
+        //TODO: City will never be null so why even make it null
+        viewmodel!!.getRecommendedVenues(city!!)
+    }
+
+    private fun subscribeToVenueViewState() {
+        viewmodel!!.venueViewState.observe(this, Observer { venueViewState ->
+            when (venueViewState) {
+                VenueViewState.Loading -> {
+                    Log.d("Venue", "Loading")
+                }
+                is VenueViewState.Success -> {
+                    Log.d("Venue", venueViewState.venues[0].venue.name)
+                }
+                is VenueViewState.ShowGenericError -> {
+                    Log.d("Venue", venueViewState.errorMessage)
+                }
+            }
+        })
     }
 }

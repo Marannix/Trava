@@ -59,6 +59,7 @@ class DashboardFragment : BaseFragment() {
     private fun setupListeners() {
         adapter.setListener(object: CityAdapter.OnCityAdapterSelectedListener {
             override fun onCitySelected(city: String) {
+                //TODO: Maybe save the city is in the shared preferences
                 listener?.onCitySelected(city)
             }
         })
