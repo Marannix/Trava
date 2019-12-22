@@ -1,6 +1,6 @@
 package com.marannix.android.trava.repository
 
-import com.marannix.android.trava.RecommendedPlacesModel
+import com.marannix.android.trava.model.RecommendedPlacesModel
 import com.marannix.android.trava.api.VenueApi
 import io.reactivex.Observable
 import io.reactivex.Single

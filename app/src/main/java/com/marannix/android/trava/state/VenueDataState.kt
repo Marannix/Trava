@@ -1,6 +1,6 @@
 package com.marannix.android.trava.state
 
-import com.marannix.android.trava.RecommendedPlacesModel
+import com.marannix.android.trava.model.RecommendedPlacesModel
 
 sealed class VenueDataState {
     data class Success(val venues: List<RecommendedPlacesModel>) : VenueDataState()

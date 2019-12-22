@@ -1,6 +1,6 @@
 package com.marannix.android.trava.api
 
-import com.marannix.android.trava.VenueResponse
+import com.marannix.android.trava.model.VenueResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
