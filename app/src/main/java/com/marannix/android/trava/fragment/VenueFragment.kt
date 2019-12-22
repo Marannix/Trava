@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.marannix.android.trava.R
+import com.marannix.android.trava.adapter.VenueAdapter
 import com.marannix.android.trava.repository.VenueRepository
 import com.marannix.android.trava.state.VenueViewState
 import com.marannix.android.trava.viewmodel.VenueViewModel
@@ -31,6 +33,7 @@ class VenueFragment : BaseFragment() {
     lateinit var repository: VenueRepository
     private var city: String? = null
     private var viewmodel: VenueViewModel? = null
+    private val adapter by lazy { VenueAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +52,7 @@ class VenueFragment : BaseFragment() {
         init()
         getVenues()
         subscribeToVenueViewState()
+        setAdapter()
     }
 
     private fun updateToolbar() {
@@ -75,7 +79,8 @@ class VenueFragment : BaseFragment() {
                     Log.d("Venue", "Loading")
                 }
                 is VenueViewState.Success -> {
-                    Log.d("Venue", venueViewState.venues[0].venue.name)
+                    adapter.setVenues(venueViewState.venues)
+//                    Log.d("Venue", venueViewState.venues[0].venue.name)
                 }
                 is VenueViewState.ShowGenericError -> {
                     Log.d("Venue", venueViewState.errorMessage)
@@ -83,4 +88,10 @@ class VenueFragment : BaseFragment() {
             }
         })
     }
+
+    private fun setAdapter() {
+        venueRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        venueRecyclerView.adapter = adapter
+    }
+
 }

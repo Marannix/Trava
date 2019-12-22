@@ -6,7 +6,6 @@
 
     <string-array name="cities_array">
         <item>Aberdeen</item>
-        <item>Albans</item>
         <item>Armagh</item>
         <item>Bangor</item>
         <item>Bath</item>
@@ -59,6 +58,7 @@
         <item>Salisbury</item>
         <item>Sheffield</item>
         <item>Southampton</item>
+        <item>St Albans</item>
         <item>Stirling</item>
         <item>Stoke-on-Trent</item>
         <item>Sunderland</item>

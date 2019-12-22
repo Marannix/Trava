@@ -34,8 +34,7 @@ class VenueViewModel @Inject constructor(
             }
         disposables.add(disposable)
     }
-
-
+    
     override fun onCleared() {
         super.onCleared()
         disposables.clear()

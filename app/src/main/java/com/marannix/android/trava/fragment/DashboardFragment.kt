@@ -55,7 +55,6 @@ class DashboardFragment : BaseFragment() {
         recyclerView.adapter = adapter
     }
 
-
     private fun setupListeners() {
         adapter.setListener(object: CityAdapter.OnCityAdapterSelectedListener {
             override fun onCitySelected(city: String) {
