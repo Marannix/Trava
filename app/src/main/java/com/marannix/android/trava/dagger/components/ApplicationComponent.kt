@@ -4,6 +4,7 @@ import android.app.Application
 import com.marannix.android.trava.MainApplication
 import com.marannix.android.trava.dagger.modules.ActivityBuilder
 import com.marannix.android.trava.dagger.modules.ApiModule
+import com.marannix.android.trava.dagger.modules.ViewModelModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -14,6 +15,7 @@ import javax.inject.Singleton
 @Component(
     modules = [ActivityBuilder::class,
         ApiModule::class,
+        ViewModelModule::class,
         AndroidSupportInjectionModule::class]
 )
 interface ApplicationComponent : AndroidInjector<MainApplication> {

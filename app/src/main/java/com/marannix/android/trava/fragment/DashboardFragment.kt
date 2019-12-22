@@ -63,22 +63,4 @@ class DashboardFragment : BaseFragment() {
             }
         })
     }
-//    @Inject
-//    lateinit var venueApi: VenueApi
-//
-//    private val compositeDisposable = CompositeDisposable()
-
-//    fun stuff() {
-//        val disposable = venueApi.getVenues("London").observeOn(AndroidSchedulers.mainThread())
-//            .subscribeOn(Schedulers.io())
-//            .subscribe({
-//                Log.d("lol", it.response.groups[0].items[0].venue.name)
-//            }, {
-//                Log.d("error", it.message)
-//            })
-//
-//        compositeDisposable.add(disposable)
-//    }
-
-
 }

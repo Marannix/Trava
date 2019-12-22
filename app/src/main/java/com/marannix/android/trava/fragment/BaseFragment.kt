@@ -1,12 +1,12 @@
 package com.marannix.android.trava.fragment
 
-import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import dagger.android.support.DaggerFragment
+import javax.inject.Inject
 
 abstract class BaseFragment : DaggerFragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
 }

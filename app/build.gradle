@@ -50,4 +50,5 @@ dependencies {
     kapt "com.google.dagger:dagger-android-processor:2.21"
     implementation 'androidx.fragment:fragment-ktx:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
 }

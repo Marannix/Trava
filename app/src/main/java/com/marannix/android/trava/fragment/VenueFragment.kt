@@ -1,13 +1,13 @@
 package com.marannix.android.trava.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 import com.marannix.android.trava.R
 import com.marannix.android.trava.repository.VenueRepository
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.marannix.android.trava.viewmodel.VenueViewModel
 import kotlinx.android.synthetic.main.fragment_venue.*
 import javax.inject.Inject
 
@@ -24,10 +24,10 @@ class VenueFragment : BaseFragment() {
         }
     }
 
-
     @Inject
     lateinit var repository: VenueRepository
     private var city: String? = null
+    private var viewmodel: VenueViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,13 +54,7 @@ class VenueFragment : BaseFragment() {
     }
 
     private fun init() {
-        city?.let {
-            repository.fetchVenueFromApi(it).observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    Log.d("oiuch", it[0].venue.name)
-                }, {
-                    Log.d("fail", it.message)
-                })
-        }
+        viewmodel =
+            activity?.let { ViewModelProviders.of(it, viewModelFactory).get(VenueViewModel::class.java) }
     }
 }
