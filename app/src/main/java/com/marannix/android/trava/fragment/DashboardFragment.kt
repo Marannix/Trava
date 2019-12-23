@@ -77,8 +77,8 @@ class DashboardFragment : BaseFragment() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         listener = null
         adapter.clearListener()
     }
