@@ -28,9 +28,12 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
 
     private var cities = emptyList<String>()
     private var topCities = emptyList<String>()
+    private var recentCities = emptyList<String>()
     private var cityListFiltered = emptyList<String>()
+
     private var listener: OnCityAdapterSelectedListener? = null
     private var shouldShowHeader = true
+    private var hasRecentCities = recentCities.isNotEmpty()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
@@ -60,20 +63,36 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
 
     override fun getItemCount(): Int {
         return when {
-            cityListFiltered.isEmpty() && shouldShowHeader -> topCities.size
-            else -> cityListFiltered.size
+            cityListFiltered.isEmpty() && shouldShowHeader -> {
+                when {
+                    hasRecentCities -> recentCities.size
+                    else -> topCities.size
+                }
+            }
+            else -> {
+                when {
+                    shouldShowHeader -> cityListFiltered.size + 1
+                    else -> cityListFiltered.size + 1
+                }
+            }
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is HeaderViewHolder -> {
-                holder.bind(shouldShowHeader)
+                holder.bind(shouldShowHeader, hasRecentCities)
             }
             is CityViewHolder -> {
                 when {
-                    cityListFiltered.isNotEmpty() -> holder.bind(cityListFiltered[position], listener)
-                    else -> if (shouldShowHeader) holder.bind(topCities[position], listener)
+                    cityListFiltered.isNotEmpty() -> holder.bind(cityListFiltered[position - 1], listener)
+                    shouldShowHeader -> {
+                        if (hasRecentCities) {
+                            holder.bind(recentCities[position - 1], listener)
+                        } else {
+                            holder.bind(topCities[position - 1], listener)
+                        }
+                    }
                 }
             }
         }
@@ -81,14 +100,11 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
-            0 -> {
-                TYPE_HEADER
-            }
-            else -> {
-                TYPE_ITEM
-            }
+            0 -> TYPE_HEADER
+            else -> TYPE_ITEM
         }
     }
+
 
     override fun getFilter(): Filter {
         return object : Filter() {
@@ -96,7 +112,13 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
                 val charString = charSequence.toString()
                 shouldShowHeader = true
                 cityListFiltered = when {
-                    charString.isEmpty() -> topCities
+                    charString.isEmpty() -> {
+                        if (recentCities.isNotEmpty()) {
+                            recentCities
+                        } else {
+                            topCities
+                        }
+                    }
                     else -> {
                         shouldShowHeader = false
                         val filteredList = ArrayList<String>()
@@ -131,6 +153,11 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
         this.notifyDataSetChanged()
     }
 
+    fun setRecentCities(cities: List<String>) {
+        this.recentCities = cities
+        this.notifyDataSetChanged()
+    }
+
     class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(cities: String, listener: OnCityAdapterSelectedListener?) {
             itemView.cityName.text = cities
@@ -141,12 +168,17 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
         }
     }
 
-    class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
-        fun bind(filtered: Boolean) {
+    class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(filtered: Boolean, hasRecentCities: Boolean) {
             when {
                 filtered -> {
                     itemView.topCityLabel.visibility = View.VISIBLE
-                    itemView.topCityLabel.text = "Top Cities"
+                    if (hasRecentCities) {
+                        itemView.topCityLabel.text = "Top Cities"
+                    } else {
+                        itemView.topCityLabel.text = "Recent"
+                    }
+
                 }
                 else -> itemView.topCityLabel.visibility = View.GONE
             }
