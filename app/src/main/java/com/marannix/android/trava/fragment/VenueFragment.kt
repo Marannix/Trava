@@ -65,10 +65,12 @@ class VenueFragment : BaseFragment() {
     }
 
     private fun getVenues() {
-        //TODO: City will never be null so why even make it null
         viewmodel!!.getRecommendedVenues(userPreference.getSelectedCity())
     }
 
+    /**
+     * The UI is updated based on the view state emitted from the viewmodel
+     */
     private fun subscribeToVenueViewState() {
         viewmodel!!.venueViewState.observe(this, Observer { venueViewState ->
             when (venueViewState) {

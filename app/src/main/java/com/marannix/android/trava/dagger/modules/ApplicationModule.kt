@@ -6,6 +6,9 @@ import android.net.ConnectivityManager
 import dagger.Module
 import dagger.Provides
 
+/**
+ * Provide context for shared preferences
+ */
 @Module
 class ApplicationModule {
 

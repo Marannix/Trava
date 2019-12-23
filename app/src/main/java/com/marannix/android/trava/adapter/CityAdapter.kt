@@ -8,6 +8,8 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.marannix.android.trava.R
+import com.marannix.android.trava.viewholder.CityViewHolder
+import com.marannix.android.trava.viewholder.HeaderViewHolder
 import kotlinx.android.synthetic.main.cities_auto_complete_row.view.*
 import kotlinx.android.synthetic.main.cities_header.view.*
 
@@ -16,6 +18,9 @@ import kotlinx.android.synthetic.main.cities_header.view.*
 private const val TYPE_HEADER = 0
 private const val TYPE_ITEM = 1
 
+/**
+ * A adapter which displays the top cities and also handles the search for other cities
+ */
 class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
     interface OnCityAdapterSelectedListener {
@@ -31,6 +36,16 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
     private var cityListFiltered = emptyList<String>()
     private var listener: OnCityAdapterSelectedListener? = null
     private var shouldShowHeader = true
+
+    fun setCities(cities: List<String>) {
+        this.cities = cities
+        this.notifyDataSetChanged()
+    }
+
+    fun setTopCities(topCities: List<String>) {
+        this.topCities = topCities
+        this.notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
@@ -89,7 +104,9 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
         }
     }
 
-
+    /**
+     * Custom filter for searching for a city
+     */
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
@@ -117,38 +134,6 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
             override fun publishResults(charSequence: CharSequence?, filterResults: FilterResults?) {
                 cityListFiltered = filterResults?.values as List<String>
                 notifyDataSetChanged()
-            }
-        }
-    }
-
-    fun setCities(cities: List<String>) {
-        this.cities = cities
-        this.notifyDataSetChanged()
-    }
-
-    fun setTopCities(topCities: List<String>) {
-        this.topCities = topCities
-        this.notifyDataSetChanged()
-    }
-
-    class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(cities: String, listener: OnCityAdapterSelectedListener?) {
-            itemView.cityName.text = cities
-            itemView.setOnClickListener {
-                listener?.onCitySelected(cities)
-                Log.d("lol", cities)
-            }
-        }
-    }
-
-    class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(filtered: Boolean) {
-            when {
-                filtered -> {
-                    itemView.topCityLabel.visibility = View.VISIBLE
-                    itemView.topCityLabel.text = "Top Cities"
-                }
-                else -> itemView.topCityLabel.visibility = View.GONE
             }
         }
     }

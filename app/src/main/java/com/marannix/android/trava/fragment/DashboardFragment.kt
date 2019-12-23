@@ -67,6 +67,9 @@ class DashboardFragment : BaseFragment() {
         })
     }
 
+    /**
+     * Remove auto complete text view background and set a filter listener
+     */
     private fun setupAutoCompleteTextView() {
         autoCompleteTextView.setBackgroundResource(0)
         autoCompleteTextView.addTextChangedListener {
