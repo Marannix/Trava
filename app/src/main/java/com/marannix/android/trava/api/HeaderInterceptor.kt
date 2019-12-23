@@ -10,7 +10,7 @@ class HeaderInterceptor : Interceptor {
     /**
      *   Added an interceptor to add the headers necessary for making each request
      */
-    
+
     override fun intercept(chain: Interceptor.Chain): Response = chain.run {
         val original = chain.request()
         val httpUrl = original.url()
