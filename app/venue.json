@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "code": 200,
+    "requestId": "5e0104d69da7ee001cf26f9d"
+  },
+  "response": {
+    "suggestedFilters": {
+      "header": "Tap to show:",
+      "filters": [
+        {
+          "name": "Open now",
+          "key": "openNow"
+        }
+      ]
+    },
+    "geocode": {
+      "what": "",
+      "where": "newcastle",
+      "center": {
+        "lat": -32.92715,
+        "lng": 151.77647
+      },
+      "displayString": "Newcastle, NSW, Australia",
+      "cc": "AU",
+      "geometry": {
+        "bounds": {
+          "ne": {
+            "lat": -32.9241602055,
+            "lng": 151.787221824
+          },
+          "sw": {
+            "lat": -32.937769046,
+            "lng": 151.76207465599998
+          }
+        }
+      },
+      "slug": "newcastle-australia",
+      "longId": "72057594040083408"
+    },
+    "headerLocation": "Newcastle",
+    "headerFullLocation": "Newcastle",
+    "headerLocationGranularity": "city",
+    "totalResults": 87,
+    "suggestedBounds": {
+      "ne": {
+        "lat": -32.91037237298413,
+        "lng": 151.79205847928029
+      },
+      "sw": {
+        "lat": -32.95139647172236,
+        "lng": 151.75460883175896
+      }
+    },
+    "groups": [
+      {
+        "type": "Recommended Places",
+        "name": "recommended",
+        "items": [
+          {
+            "reasons": {
+              "count": 0,
+              "items": [
+                {
+                  "summary": "This spot is popular",
+                  "type": "general",
+                  "reasonName": "globalInteractionReason"
+                }
+              ]
+            },
+            "venue": {
+              "id": "534f84ff498ece7608049b08",
+              "name": "Coal & Cedar",
+              "location": {
+                "address": "380 Hunter Street",
+                "lat": -32.92683734428717,
+                "lng": 151.77383423741594,
+                "labeledLatLngs": [
+                  {
+                    "label": "display",
+                    "lat": -32.92683734428717,
+                    "lng": 151.77383423741594
+                  }
+                ],
+                "postalCode": "2300",
+                "cc": "AU",
+                "city": "Newcastle",
+                "state": "NSW",
+                "country": "Australia",
+                "formattedAddress": [
+                  "380 Hunter Street",
+                  "Newcastle NSW 2300",
+                  "Australia"
+                ]
+              },
+              "categories": [
+                {
+                  "id": "4bf58dd8d48988d11e941735",
+                  "name": "Cocktail Bar",
+                  "pluralName": "Cocktail Bars",
+                  "shortName": "Cocktail",
+                  "icon": {
+                    "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/cocktails_",
+                    "suffix": ".png"
+                  },
+                  "primary": true
+                }
+              ],
+              "photos": {
+                "count": 0,
+                "groups": []
+              }
+            },
+            "referralId": "e-0-534f84ff498ece7608049b08-0"
+          },
+          {
+            "reasons": {
+              "count": 0,
+              "items": [
+                {
+                  "summary": "This spot is popular",
+                  "type": "general",
+                  "reasonName": "globalInteractionReason"
+                }
+              ]
+            },
+            "venue": {
+              "id": "4ba6aa8bf964a520536739e3",
+              "name": "Civic Park",
+              "location": {
+                "address": "King St.",
+                "crossStreet": "at Auckland, Darby & Laman Sts",
+                "lat": -32.92821674517353,
+                "lng": 151.77252500076253,
+                "labeledLatLngs": [
+                  {
+                    "label": "display",
+                    "lat": -32.92821674517353,
+                    "lng": 151.77252500076253
+                  }
+                ],
+                "postalCode": "2300",
+                "cc": "AU",
+                "city": "Newcastle",
+                "state": "NSW",
+                "country": "Australia",
+                "formattedAddress": [
+                  "King St. (at Auckland, Darby & Laman Sts)",
+                  "Newcastle NSW 2300",
+                  "Australia"
+                ]
+              },
+              "categories": [
+                {
+                  "id": "4bf58dd8d48988d163941735",
+                  "name": "Park",
+                  "pluralName": "Parks",
+                  "shortName": "Park",
+                  "icon": {
+                    "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_",
+                    "suffix": ".png"
+                  },
+                  "primary": true
+                }
+              ],
+              "photos": {
+                "count": 0,
+                "groups": []
+              }
+            },
+            "referralId": "e-0-4ba6aa8bf964a520536739e3-1"
+          },
+          {
+            "reasons": {
+              "count": 0,
+              "items": [
+                {
+                  "summary": "This spot is popular",
+                  "type": "general",
+                  "reasonName": "globalInteractionReason"
+                }
+              ]
+            },
+            "venue": {
+              "id": "552e7d4b498ef6abfdddfed9",
+              "name": "FogHorn Brewhouse",
+              "location": {
+                "address": "218A King St",
+                "lat": -32.927321378852334,
+                "lng": 151.77534374169886,
+                "labeledLatLngs": [
+                  {
+                    "label": "display",
+                    "lat": -32.927321378852334,
+                    "lng": 151.77534374169886
+                  }
+                ],
+                "postalCode": "2300",
+                "cc": "AU",
+                "neighborhood": "Newcastle",
+                "city": "Newcastle",
+                "state": "NSW",
+                "country": "Australia",
+                "formattedAddress": [
+                  "218A King St",
+                  "Newcastle NSW 2300",
+                  "Australia"
+                ]
+              },
+              "categories": [
+                {
+                  "id": "50327c8591d4c4b30a586d5d",
+                  "name": "Brewery",
+                  "pluralName": "Breweries",
+                  "shortName": "Brewery",
+                  "icon": {
+                    "prefix": "https://ss3.4sqi.net/img/categories_v2/food/brewery_",
+                    "suffix": ".png"
+                  },
+                  "primary": true
+                }
+              ],
+              "photos": {
+                "count": 0,
+                "groups": []
+              }
+            },
+            "referralId": "e-0-507a4c73e4b06da142453600-29"
+          }
+        ]
+      }
+    ]
+  }
+}
