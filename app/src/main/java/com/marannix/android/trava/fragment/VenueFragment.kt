@@ -18,8 +18,6 @@ import kotlinx.android.synthetic.main.auth_error_layout.*
 import kotlinx.android.synthetic.main.fragment_venue.*
 import javax.inject.Inject
 
-private const val ARG_CITY = "city"
-
 class VenueFragment : BaseFragment() {
 
     companion object {
@@ -81,6 +79,7 @@ class VenueFragment : BaseFragment() {
                 is VenueViewState.Success -> {
                     loadingDialog.dismiss()
                     showLayout()
+                    recommendedVenueLabel.text = getString(R.string.recommended_places)
                     adapter.setVenues(venueViewState.venues)
                 }
                 is VenueViewState.ShowGenericError -> {
@@ -94,6 +93,7 @@ class VenueFragment : BaseFragment() {
     private fun setAdapter() {
         venueRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         venueRecyclerView.adapter = adapter
+        venueRecyclerView.isNestedScrollingEnabled = false
     }
 
     /**
