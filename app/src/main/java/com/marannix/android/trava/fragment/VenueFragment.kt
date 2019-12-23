@@ -23,25 +23,17 @@ class VenueFragment : BaseFragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(city: String) = VenueFragment().apply {
-            arguments = Bundle().apply {
-                putString(ARG_CITY, city)
-            }
-        }
+        fun newInstance() = VenueFragment()
     }
 
     @Inject
     lateinit var repository: VenueRepository
-    private var city: String? = null
     private var viewmodel: VenueViewModel? = null
     private val adapter by lazy { VenueAdapter() }
     private lateinit var loadingDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            city = it.getString(ARG_CITY)
-        }
         loadingDialog = FullscreenLoadingDialog(requireContext()).apply {
             setCanceledOnTouchOutside(false)
         }
@@ -61,7 +53,7 @@ class VenueFragment : BaseFragment() {
     }
 
     private fun updateToolbar() {
-        toolbar.title = city
+        toolbar.title = userPreference.getSelectedCity()
         toolbar.setNavigationOnClickListener {
             activity?.onBackPressed()
         }
@@ -74,7 +66,7 @@ class VenueFragment : BaseFragment() {
 
     private fun getVenues() {
         //TODO: City will never be null so why even make it null
-        viewmodel!!.getRecommendedVenues(city!!)
+        viewmodel!!.getRecommendedVenues(userPreference.getSelectedCity())
     }
 
     private fun subscribeToVenueViewState() {

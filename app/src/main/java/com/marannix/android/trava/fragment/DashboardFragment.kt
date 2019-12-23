@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_dashboard.*
 class DashboardFragment : BaseFragment() {
 
     interface OnCitySelectedListener {
-        fun onCitySelected(city: String)
+        fun onCitySelected()
     }
 
     companion object {
@@ -42,6 +42,9 @@ class DashboardFragment : BaseFragment() {
         setupAutoCompleteTextView()
     }
 
+    /**
+     * Create a fake list of cities and top cities
+     */
     private fun createList() {
         city = resources.getStringArray(R.array.cities_array).toList()
         topCity = resources.getStringArray(R.array.top_cities_array).toList()
@@ -55,11 +58,11 @@ class DashboardFragment : BaseFragment() {
     }
 
     private fun setupListeners() {
-        adapter.setListener(object: CityAdapter.OnCityAdapterSelectedListener {
+        adapter.setListener(object : CityAdapter.OnCityAdapterSelectedListener {
             override fun onCitySelected(city: String) {
-                //TODO: Maybe save the city is in the shared preferences
+                userPreference.setSelectedCity(city)
                 closeKeyboard()
-                listener?.onCitySelected(city)
+                listener?.onCitySelected()
             }
         })
     }

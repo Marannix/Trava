@@ -17,9 +17,8 @@ class DashboardActivity : BaseActivity() {
     private fun initDashboardFragment() {
         val fragment = DashboardFragment.newInstance()
         fragment.attach(object : DashboardFragment.OnCitySelectedListener {
-            override fun onCitySelected(city: String) {
-                Log.d("activity", city)
-                initVenueFragment(city)
+            override fun onCitySelected() {
+                initVenueFragment()
             }
         })
         supportFragmentManager.inTransaction {
@@ -27,8 +26,8 @@ class DashboardActivity : BaseActivity() {
         }
     }
 
-    private fun initVenueFragment(city: String) {
-        val fragment = VenueFragment.newInstance(city)
+    private fun initVenueFragment() {
+        val fragment = VenueFragment.newInstance()
         supportFragmentManager.inTransaction {
             add(R.id.fragmentContainer, fragment).addToBackStack(fragment.javaClass.name)
         }
