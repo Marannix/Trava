@@ -10,8 +10,7 @@ class HeaderInterceptor : Interceptor {
     /**
      *   Added an interceptor to add the headers necessary for making each request
      */
-
-    //TODO: Find a way to pass in todays date
+    
     override fun intercept(chain: Interceptor.Chain): Response = chain.run {
         val original = chain.request()
         val httpUrl = original.url()
