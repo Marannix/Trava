@@ -43,7 +43,7 @@
         <item>London</item>
         <item>Londonderry</item>
         <item>Manchester</item>
-        <item>Newcastle upon Tyne</item>
+        <item>Newcastle</item>
         <item>Newport</item>
         <item>Newry</item>
         <item>Norwich</item>
@@ -72,5 +72,18 @@
         <item>Worcester</item>
         <item>York</item>
     </string-array>
+
+    <string-array name="top_cities_array">
+        <item>London</item>
+        <item>Edinburgh</item>
+        <item>York</item>
+        <item>Leeds</item>
+        <item>Nottingham</item>
+        <item>Belfast</item>
+        <item>Newcastle</item>
+        <item>Glasgow</item>
+        <item>Manchester</item>
+    </string-array>
+
     <string name="lottie_loading_progress">loading_progress.json</string>
 </resources>

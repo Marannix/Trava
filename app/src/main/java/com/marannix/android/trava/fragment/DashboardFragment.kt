@@ -26,6 +26,7 @@ class DashboardFragment : BaseFragment() {
     }
 
     private var city = emptyList<String>()
+    private var topCity = emptyList<String>()
     private val adapter = CityAdapter()
     private var listener: OnCitySelectedListener? = null
 
@@ -43,12 +44,14 @@ class DashboardFragment : BaseFragment() {
 
     private fun createList() {
         city = resources.getStringArray(R.array.cities_array).toList()
+        topCity = resources.getStringArray(R.array.top_cities_array).toList()
     }
 
     private fun setAdapter() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         adapter.setCities(city)
+        adapter.setTopCities(topCity)
     }
 
     private fun setupListeners() {

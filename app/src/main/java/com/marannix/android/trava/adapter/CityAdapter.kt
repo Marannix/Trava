@@ -23,6 +23,7 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(), Filterable {
     }
 
     private var cities = emptyList<String>()
+    private var topCities = emptyList<String>()
     private var cityListFiltered = emptyList<String>()
     private var listener: OnCityAdapterSelectedListener? = null
 
@@ -31,12 +32,18 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(), Filterable {
     }
 
     override fun getItemCount(): Int {
-        return cityListFiltered.size
+        return if (cityListFiltered.isEmpty()) {
+            topCities.size
+        } else {
+            cityListFiltered.size
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (cityListFiltered.isNotEmpty()) {
             holder.bind(cityListFiltered[position], listener)
+        } else {
+            holder.bind(topCities[position], listener)
         }
     }
 
@@ -45,8 +52,8 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(), Filterable {
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
                 val charString = charSequence.toString()
                 cityListFiltered = if (charString.isEmpty()) {
-                    //TODO: Show items which have been selected previously
-                    emptyList()
+                    //TODO: Show items which have been selected previously#
+                    topCities
                 } else {
                     val filteredList = ArrayList<String>()
                     for (row in cities) {
@@ -71,6 +78,11 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(), Filterable {
 
     fun setCities(cities: List<String>) {
         this.cities = cities
+        this.notifyDataSetChanged()
+    }
+
+    fun setTopCities(topCities: List<String>) {
+        this.topCities = topCities
         this.notifyDataSetChanged()
     }
 
