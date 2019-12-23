@@ -61,19 +61,22 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
     override fun getItemCount(): Int {
         return when {
             cityListFiltered.isEmpty() && shouldShowHeader -> topCities.size
-            else -> cityListFiltered.size
+            else -> {
+                when {
+                    shouldShowHeader -> cityListFiltered.size + 1
+                    else -> cityListFiltered.size + 1
+                }
+            }
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is HeaderViewHolder -> {
-                holder.bind(shouldShowHeader)
-            }
+            is HeaderViewHolder -> holder.bind(shouldShowHeader)
             is CityViewHolder -> {
                 when {
-                    cityListFiltered.isNotEmpty() -> holder.bind(cityListFiltered[position], listener)
-                    else -> if (shouldShowHeader) holder.bind(topCities[position], listener)
+                    cityListFiltered.isNotEmpty() -> holder.bind(cityListFiltered[position - 1], listener)
+                    shouldShowHeader -> holder.bind(topCities[position - 1], listener)
                 }
             }
         }
@@ -81,14 +84,11 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
-            0 -> {
-                TYPE_HEADER
-            }
-            else -> {
-                TYPE_ITEM
-            }
+            0 -> TYPE_HEADER
+            else -> TYPE_ITEM
         }
     }
+
 
     override fun getFilter(): Filter {
         return object : Filter() {
@@ -141,7 +141,7 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
         }
     }
 
-    class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
+    class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(filtered: Boolean) {
             when {
                 filtered -> {
