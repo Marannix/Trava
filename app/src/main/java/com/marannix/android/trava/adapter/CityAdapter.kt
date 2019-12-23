@@ -59,10 +59,9 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
     }
 
     override fun getItemCount(): Int {
-        return if (cityListFiltered.isEmpty()) {
-            topCities.size
-        } else {
-            cityListFiltered.size
+        return when {
+            cityListFiltered.isEmpty() && shouldShowHeader -> topCities.size
+            else -> cityListFiltered.size
         }
     }
 
@@ -72,10 +71,9 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
                 holder.bind(shouldShowHeader)
             }
             is CityViewHolder -> {
-                if (cityListFiltered.isNotEmpty()) {
-                    holder.bind(cityListFiltered[position], listener)
-                } else {
-                    holder.bind(topCities[position], listener)
+                when {
+                    cityListFiltered.isNotEmpty() -> holder.bind(cityListFiltered[position], listener)
+                    else -> if (shouldShowHeader) holder.bind(topCities[position], listener)
                 }
             }
         }
@@ -97,17 +95,18 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
                 val charString = charSequence.toString()
                 shouldShowHeader = true
-                cityListFiltered = if (charString.isEmpty()) {
-                    topCities
-                } else {
-                    shouldShowHeader = false
-                    val filteredList = ArrayList<String>()
-                    for (row in cities) {
-                        if (row.toLowerCase().contains(charString.toLowerCase())) {
-                            filteredList.add(row)
+                cityListFiltered = when {
+                    charString.isEmpty() -> topCities
+                    else -> {
+                        shouldShowHeader = false
+                        val filteredList = ArrayList<String>()
+                        for (row in cities) {
+                            if (row.toLowerCase().contains(charString.toLowerCase())) {
+                                filteredList.add(row)
+                            }
                         }
+                        filteredList
                     }
-                    filteredList
                 }
 
                 val filterResults = FilterResults()
@@ -144,11 +143,12 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable 
 
     class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
         fun bind(filtered: Boolean) {
-            if (filtered) {
-                itemView.topCityLabel.visibility = View.VISIBLE
-                itemView.topCityLabel.text = "Top Cities"
-            } else {
-                itemView.topCityLabel.visibility = View.GONE
+            when {
+                filtered -> {
+                    itemView.topCityLabel.visibility = View.VISIBLE
+                    itemView.topCityLabel.text = "Top Cities"
+                }
+                else -> itemView.topCityLabel.visibility = View.GONE
             }
         }
     }
