@@ -16,6 +16,10 @@ class VenueViewModel @Inject constructor(
     private val disposables = CompositeDisposable()
     val venueViewState = MutableLiveData<VenueViewState>()
 
+    /**
+     * Return a venue view state to the viewmodel which will either emit success or an error state
+     * based on the data state from the usecase
+     */
     fun getRecommendedVenues(city: String) {
         val disposable = venueUseCase.getVenueDataState(city)
             .observeOn(AndroidSchedulers.mainThread())

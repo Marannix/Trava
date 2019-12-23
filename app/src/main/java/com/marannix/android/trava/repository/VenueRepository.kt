@@ -15,6 +15,9 @@ class VenueRepository @Inject constructor(
         return fetchVenueFromApi(city).toObservable()
     }
 
+    /**
+     *  Get the venue information from the api
+     */
     private fun fetchVenueFromApi(city: String): Single<List<RecommendedPlacesModel>> {
         return venueApi.getVenues(city).map {
             it.response.groups[0].items
