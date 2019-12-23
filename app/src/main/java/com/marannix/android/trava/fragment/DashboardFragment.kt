@@ -1,6 +1,7 @@
 package com.marannix.android.trava.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +53,7 @@ class DashboardFragment : BaseFragment() {
         recyclerView.adapter = adapter
         adapter.setCities(city)
         adapter.setTopCities(topCity)
+        adapter.setRecentCities(userPreference.getRecentCities().toMutableList())
     }
 
     private fun setupListeners() {
@@ -59,7 +61,10 @@ class DashboardFragment : BaseFragment() {
             override fun onCitySelected(city: String) {
                 //TODO: Maybe save the city is in the shared preferences
                 closeKeyboard()
+                userPreference.setRecentCities(city)
+                Log.d("working???", userPreference.getRecentCities().toString())
                 listener?.onCitySelected(city)
+
             }
         })
     }
