@@ -14,6 +14,7 @@ import com.marannix.android.trava.dialog.FullscreenLoadingDialog
 import com.marannix.android.trava.repository.VenueRepository
 import com.marannix.android.trava.state.VenueViewState
 import com.marannix.android.trava.viewmodel.VenueViewModel
+import kotlinx.android.synthetic.main.auth_error_layout.*
 import kotlinx.android.synthetic.main.fragment_venue.*
 import javax.inject.Inject
 
@@ -95,9 +96,16 @@ class VenueFragment : BaseFragment() {
         venueRecyclerView.adapter = adapter
     }
 
+    /**
+     * Added a restart button to fetch venue
+     */
     private fun showErrorLayout() {
         venueRecyclerView.visibility = View.INVISIBLE
         errorAuthLayout.visibility = View.VISIBLE
+
+        restartButton.setOnClickListener {
+            getVenues()
+        }
     }
 
     private fun showLayout() {

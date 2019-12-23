@@ -86,4 +86,5 @@
     </string-array>
 
     <string name="lottie_loading_progress">loading_progress.json</string>
+    <string name="generic_error_message">Oops! Something went wrong.</string>
 </resources>
