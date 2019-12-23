@@ -1,7 +1,9 @@
 package com.marannix.android.trava.activity
 
+import android.content.Context
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import dagger.android.AndroidInjection
@@ -23,6 +25,14 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
             finish()
         } else {
             supportFragmentManager.popBackStack()
+        }
+    }
+
+    fun closeKeyboard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 }
