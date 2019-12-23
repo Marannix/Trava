@@ -9,10 +9,14 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.marannix.android.trava.R
 import kotlinx.android.synthetic.main.cities_auto_complete_row.view.*
+import kotlinx.android.synthetic.main.cities_header.view.*
 
 // https://www.androidhive.info/RxJava/android-rxjava-instant-search-local-remote-databases/
 // https://www.youtube.com/watch?v=ocM1Yw_ktqM&t=4s
-class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(), Filterable {
+private const val TYPE_HEADER = 0
+private const val TYPE_ITEM = 1
+
+class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Filterable {
 
     interface OnCityAdapterSelectedListener {
         fun onCitySelected(city: String)
@@ -26,9 +30,32 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(), Filterable {
     private var topCities = emptyList<String>()
     private var cityListFiltered = emptyList<String>()
     private var listener: OnCityAdapterSelectedListener? = null
+    private var shouldShowHeader = true
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.cities_auto_complete_row, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        when (viewType) {
+            TYPE_HEADER -> {
+                return HeaderViewHolder(
+                    LayoutInflater.from(parent.context).inflate(
+                        R.layout.cities_header,
+                        parent,
+                        false
+                    )
+                )
+            }
+            TYPE_ITEM -> {
+                return CityViewHolder(
+                    LayoutInflater.from(parent.context).inflate(
+                        R.layout.cities_auto_complete_row,
+                        parent,
+                        false
+                    )
+                )
+            }
+            else -> {
+                throw RuntimeException("No match for " + viewType + ".")
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -39,11 +66,29 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(), Filterable {
         }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (cityListFiltered.isNotEmpty()) {
-            holder.bind(cityListFiltered[position], listener)
-        } else {
-            holder.bind(topCities[position], listener)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder) {
+            is HeaderViewHolder -> {
+                holder.bind(shouldShowHeader)
+            }
+            is CityViewHolder -> {
+                if (cityListFiltered.isNotEmpty()) {
+                    holder.bind(cityListFiltered[position], listener)
+                } else {
+                    holder.bind(topCities[position], listener)
+                }
+            }
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (position) {
+            0 -> {
+                TYPE_HEADER
+            }
+            else -> {
+                TYPE_ITEM
+            }
         }
     }
 
@@ -51,10 +96,11 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(), Filterable {
         return object : Filter() {
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
                 val charString = charSequence.toString()
+                shouldShowHeader = true
                 cityListFiltered = if (charString.isEmpty()) {
-                    //TODO: Show items which have been selected previously#
                     topCities
                 } else {
+                    shouldShowHeader = false
                     val filteredList = ArrayList<String>()
                     for (row in cities) {
                         if (row.toLowerCase().contains(charString.toLowerCase())) {
@@ -86,12 +132,23 @@ class CityAdapter : RecyclerView.Adapter<CityAdapter.ViewHolder>(), Filterable {
         this.notifyDataSetChanged()
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(cities: String, listener: OnCityAdapterSelectedListener?) {
             itemView.cityName.text = cities
             itemView.setOnClickListener {
                 listener?.onCitySelected(cities)
                 Log.d("lol", cities)
+            }
+        }
+    }
+
+    class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
+        fun bind(filtered: Boolean) {
+            if (filtered) {
+                itemView.topCityLabel.visibility = View.VISIBLE
+                itemView.topCityLabel.text = "Top Cities"
+            } else {
+                itemView.topCityLabel.visibility = View.GONE
             }
         }
     }
