@@ -43,5 +43,4 @@ class VenueAdapter : RecyclerView.Adapter<VenueAdapter.ViewHolder>() {
                 .into(itemView.venueImage)
         }
     }
-
 }

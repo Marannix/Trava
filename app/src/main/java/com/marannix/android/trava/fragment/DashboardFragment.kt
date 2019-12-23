@@ -36,14 +36,9 @@ class DashboardFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         createList()
-        autoCompleteTextView.setBackgroundResource(0)
         setAdapter()
-
-        adapter.setCities(city)
         setupListeners()
-        autoCompleteTextView.addTextChangedListener {
-            adapter.filter.filter(it.toString())
-        }
+        setupAutoCompleteTextView()
     }
 
     private fun createList() {
@@ -53,6 +48,7 @@ class DashboardFragment : BaseFragment() {
     private fun setAdapter() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
+        adapter.setCities(city)
     }
 
     private fun setupListeners() {
@@ -62,5 +58,18 @@ class DashboardFragment : BaseFragment() {
                 listener?.onCitySelected(city)
             }
         })
+    }
+
+    private fun setupAutoCompleteTextView() {
+        autoCompleteTextView.setBackgroundResource(0)
+        autoCompleteTextView.addTextChangedListener {
+            adapter.filter.filter(it.toString())
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        listener = null
+        adapter.clearListener()
     }
 }

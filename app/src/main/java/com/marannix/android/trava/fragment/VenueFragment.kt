@@ -1,7 +1,7 @@
 package com.marannix.android.trava.fragment
 
+import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marannix.android.trava.R
 import com.marannix.android.trava.adapter.VenueAdapter
+import com.marannix.android.trava.dialog.FullscreenLoadingDialog
 import com.marannix.android.trava.repository.VenueRepository
 import com.marannix.android.trava.state.VenueViewState
 import com.marannix.android.trava.viewmodel.VenueViewModel
@@ -34,11 +35,15 @@ class VenueFragment : BaseFragment() {
     private var city: String? = null
     private var viewmodel: VenueViewModel? = null
     private val adapter by lazy { VenueAdapter() }
+    private lateinit var loadingDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             city = it.getString(ARG_CITY)
+        }
+        loadingDialog = FullscreenLoadingDialog(requireContext()).apply {
+            setCanceledOnTouchOutside(false)
         }
     }
 
@@ -51,8 +56,8 @@ class VenueFragment : BaseFragment() {
         updateToolbar()
         init()
         getVenues()
-        subscribeToVenueViewState()
         setAdapter()
+        subscribeToVenueViewState()
     }
 
     private fun updateToolbar() {
@@ -76,13 +81,16 @@ class VenueFragment : BaseFragment() {
         viewmodel!!.venueViewState.observe(this, Observer { venueViewState ->
             when (venueViewState) {
                 VenueViewState.Loading -> {
-                    Log.d("Venue", "Loading")
+                    loadingDialog.show()
                 }
                 is VenueViewState.Success -> {
+                    loadingDialog.dismiss()
+                    showLayout()
                     adapter.setVenues(venueViewState.venues)
                 }
                 is VenueViewState.ShowGenericError -> {
-                    Log.d("Venue", venueViewState.errorMessage)
+                    loadingDialog.dismiss()
+                    showErrorLayout()
                 }
             }
         })
@@ -93,4 +101,13 @@ class VenueFragment : BaseFragment() {
         venueRecyclerView.adapter = adapter
     }
 
+    private fun showErrorLayout() {
+        venueRecyclerView.visibility = View.INVISIBLE
+        errorAuthLayout.visibility = View.VISIBLE
+    }
+
+    private fun showLayout() {
+        venueRecyclerView.visibility = View.VISIBLE
+        errorAuthLayout.visibility = View.INVISIBLE
+    }
 }

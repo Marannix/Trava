@@ -29,12 +29,15 @@ class VenueViewModel @Inject constructor(
                     }
                 }
             }.doOnSubscribe { venueViewState.value = VenueViewState.Loading }
-            .subscribe { viewstate ->
+            .subscribe({ viewstate ->
                 venueViewState.value = viewstate
+            }, {
+                venueViewState.value = VenueViewState.ShowGenericError(it.message)
             }
+            )
         disposables.add(disposable)
     }
-    
+
     override fun onCleared() {
         super.onCleared()
         disposables.clear()

@@ -72,4 +72,5 @@
         <item>Worcester</item>
         <item>York</item>
     </string-array>
+    <string name="lottie_loading_progress">loading_progress.json</string>
 </resources>
