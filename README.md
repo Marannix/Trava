@@ -52,3 +52,6 @@ A loading spinner was added to indicate network calling so the user is aware som
 I then created test regarding the data and view of the venues
 
 - Bug fixes and improvement of the UI were added in between features and after.
+
+- I didn't add database however I could had.
+If I did add the database, I would use Room and store the city alongside the venues inside. 
