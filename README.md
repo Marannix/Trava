@@ -3,6 +3,7 @@
  ### Android Architecture Components and libraries used
 
 ```
+- MVVM
 - Dagger
 - Retrofit
 - RxJava 
