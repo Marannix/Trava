@@ -27,17 +27,19 @@ You use the search bar to find more cities.
 |---|---|
 |![WhatsApp Image 2019-12-24 at 14 11 03](https://user-images.githubusercontent.com/15348446/71416159-3fa4da00-2657-11ea-8ad5-9c9d1f91ad6b.jpeg)|![WhatsApp Image 2019-12-24 at 14 11 03 (1)](https://user-images.githubusercontent.com/15348446/71416161-40d60700-2657-11ea-810e-74dd616e3c5d.jpeg)|
 
+The user can scroll down and see more recommended venues.
+
+| Oxford Venue | Scrolling down|
+|---|---|
+|![WhatsApp Image 2019-12-24 at 14 03 19](https://user-images.githubusercontent.com/15348446/71416258-93afbe80-2657-11ea-9471-42bfa690e289.jpeg)|![WhatsApp Image 2019-12-24 at 14 03 19 (1)](https://user-images.githubusercontent.com/15348446/71416260-94e0eb80-2657-11ea-9db8-563fa2c4b7a0.jpeg)|
+
 I've added an generic error screen when the device goes offline (or any error occurs), this can be triggered by clicking on a city while the device is offline. I added a restart button which can be pressed to retrieve the recommended places when the devices goes back online.
 
 | Loading  Screen | Error Screen |
 |---|---|
 |![WhatsApp Image 2019-12-24 at 14 03 12](https://user-images.githubusercontent.com/15348446/71416058-c7d6af80-2656-11ea-960b-6e8ad2fd62e9.jpeg)|![WhatsApp Image 2019-12-24 at 14 07 33](https://user-images.githubusercontent.com/15348446/71416059-c86f4600-2656-11ea-97dc-f7826e83f796.jpeg)|
 
-The user can scroll down and see more recommended venues.
 
-| Oxford Venue | Scrolling down|
-|---|---|
-|![WhatsApp Image 2019-12-24 at 14 03 19](https://user-images.githubusercontent.com/15348446/71416258-93afbe80-2657-11ea-9471-42bfa690e289.jpeg)|![WhatsApp Image 2019-12-24 at 14 03 19 (1)](https://user-images.githubusercontent.com/15348446/71416260-94e0eb80-2657-11ea-9db8-563fa2c4b7a0.jpeg)|
 
 
 ### What approach did I take?
