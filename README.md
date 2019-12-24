@@ -39,9 +39,6 @@ I've added an generic error screen when the device goes offline (or any error oc
 |---|---|
 |![WhatsApp Image 2019-12-24 at 14 03 12](https://user-images.githubusercontent.com/15348446/71416058-c7d6af80-2656-11ea-960b-6e8ad2fd62e9.jpeg)|![WhatsApp Image 2019-12-24 at 14 07 33](https://user-images.githubusercontent.com/15348446/71416059-c86f4600-2656-11ea-97dc-f7826e83f796.jpeg)|
 
-
-
-
 ### What approach did I take?
 
 To save myself time, I copied a list of cities in the United Kingdom from Wikipedia :)
@@ -62,6 +59,8 @@ I then created a viewmodel alongisde the data and view states to handle the venu
 
 I created the UI of the venue fragment which displays the category icon, the name, address and post code of the venue.
 
+The selected city is stored inside the shared preference where it can be retrieved by the venue fragment.
+
 A loading spinner was added to indicate network calling so the user is aware something is happenning in the background.
 
 I then created test regarding the data and view of the venues
@@ -69,4 +68,5 @@ I then created test regarding the data and view of the venues
 - Bug fixes and improvement of the UI were added in between features and after.
 
 - I didn't add database however I could had.
-If I did add the database, I would use Room and store the city alongside the venues inside. 
+- If I did add the database, I would use Room and store the city alongside the venues inside. 
+- The screen isn't optimised for tablet (I would had used a guideline to handle the width of the screen 
